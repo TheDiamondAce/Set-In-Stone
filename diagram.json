@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "author": "Hira Shrestha",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard", "id": "bb1", "top": -127.8, "left": -314, "attrs": {} },
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 142.34,
+      "left": -255.5,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 390.2,
+      "left": 48,
+      "attrs": { "color": "red", "xray": "1" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn2",
+      "top": 342.2,
+      "left": -19.2,
+      "attrs": { "color": "green", "xray": "1" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn3",
+      "top": 275,
+      "left": 38.4,
+      "attrs": { "color": "blue", "xray": "1" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn4",
+      "top": 342.2,
+      "left": 115.2,
+      "attrs": { "color": "yellow", "xray": "1" }
+    },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": 478.7, "left": -9.8, "attrs": {} },
+    {
+      "type": "board-ili9341-cap-touch",
+      "id": "lcd1",
+      "top": 8.32,
+      "left": 503.94,
+      "rotate": 90,
+      "attrs": {}
+    },
+    { "type": "wokwi-slide-switch", "id": "sw1", "top": 321.2, "left": 291.1, "attrs": {} },
+    {
+      "type": "wokwi-analog-joystick",
+      "id": "joystick1",
+      "top": 448.1,
+      "left": 273.1,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text1",
+      "top": 739.2,
+      "left": -412.8,
+      "attrs": {
+        "text": "I just realized that I could've used the breadboard and use way less wires, but eh whatever. Ill make another version sooner or later\n"
+      }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 386.4,
+      "left": -449.4,
+      "attrs": { "volume": "0.1" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "bb1:tn.50", "bb1:bn.50", "black", [ "v-0.1", "h85.6", "v172.8" ] ],
+    [ "esp:GND.1", "bb1:bn.1", "black", [ "v-86.25", "h-19.2", "v-46.7" ] ],
+    [ "btn3:1.r", "bb1:bn.38", "black", [ "v0", "h29" ] ],
+    [ "joystick1:GND", "bb1:bn.44", "black", [ "h0" ] ],
+    [ "btn4:1.r", "bb1:bn.39", "black", [ "v-19.2", "h-19" ] ],
+    [ "btn1:1.r", "bb1:bn.40", "black", [ "v0", "h77", "v-134.4", "h-19.2" ] ],
+    [ "btn2:1.r", "bb1:bn.37", "black", [ "v-28.8", "h-38.2", "v-76.8", "h124.8" ] ],
+    [ "joystick1:VCC", "bb1:bp.46", "red", [ "h0" ] ],
+    [ "pot1:GND", "bb1:bn.41", "black", [ "v76.8", "h172.8", "v-384", "h0.8" ] ],
+    [ "pot1:VCC", "bb1:bp.43", "red", [ "v57.6", "h172" ] ],
+    [ "pot1:SIG", "esp:32", "cyan", [ "v48", "h-365.2", "v-403.2", "h153.6" ] ],
+    [ "lcd1:GND", "bb1:tn.49", "black", [ "h-48", "v-211.2", "h-124" ] ],
+    [ "lcd1:VCC", "bb1:tp.50", "red", [ "h-28.8", "v-230.4" ] ],
+    [ "esp:3V3", "bb1:bp.5", "red", [ "v-76.65", "h-105.6", "v-28.8" ] ],
+    [ "bb1:bp.1", "bb1:tp.1", "red", [ "v-0.9", "h-77.6", "v-172.8", "h76.8" ] ],
+    [ "lcd1:SCL", "esp:22", "purple", [ "h-163.2", "v240", "h144", "v220.8", "h-624" ] ],
+    [ "lcd1:SDA", "esp:21", "magenta", [ "h-57.6", "v508.8", "h-528" ] ],
+    [ "esp:23", "lcd1:MOSI", "green", [ "v384", "h585.6", "v-326.4", "h-19.2", "v-192" ] ],
+    [ "lcd1:SCK", "esp:18", "yellow", [ "h-9.6", "v163.2", "h19.2", "v403.2", "h-595.2" ] ],
+    [ "lcd1:D/C", "esp:2", "gray", [ "h-28.8", "v230.4", "h57.6", "v364.8", "h-720" ] ],
+    [ "sw1:2", "esp:GND.3", "black", [ "v105.6", "h-412.7" ] ],
+    [ "sw1:1", "esp:14", "green", [ "v86.4", "h-384", "v-307.2", "h-144" ] ],
+    [ "esp:33", "joystick1:SEL", "green", [ "v-47.85", "h393.6", "v355.2" ] ],
+    [ "lcd1:CS", "esp:27", "violet", [ "h0" ] ],
+    [ "esp:19", "lcd1:RST", "yellow", [ "v28.8", "h163.2", "v-153.6" ] ],
+    [ "esp:4", "lcd1:LED", "green", [ "v96", "h595.2", "v9.6" ] ],
+    [ "esp:5", "lcd1:MISO", "limegreen", [ "v38.4", "h172.8", "v-134.4" ] ],
+    [ "esp:17", "btn1:2.l", "red", [ "v0" ] ],
+    [ "esp:16", "btn2:2.l", "green", [ "v0" ] ],
+    [ "esp:26", "btn3:2.l", "blue", [ "v-28.65", "h153.6", "v134.4" ] ],
+    [
+      "esp:25",
+      "btn4:2.l",
+      "gold",
+      [ "v-19.05", "h307.2", "v96", "h28.8", "v48", "h-38.4", "v48", "h19.2" ]
+    ],
+    [ "joystick1:VERT", "esp:35", "cyan", [ "h-28.8", "v-355.2", "h-393.6", "v38.4", "h-19.2" ] ],
+    [ "joystick1:HORZ", "esp:34", "cyan", [ "h-38.4", "v-345.6", "h-374.4" ] ],
+    [ "bz1:1", "bb1:bn.2", "black", [ "v28.8", "h-48", "v-393.6", "h211.2", "v-28.8" ] ],
+    [ "esp:15", "bz1:2", "red", [ "v201.6", "h-143.6" ] ]
+  ],
+  "dependencies": {}
+}
