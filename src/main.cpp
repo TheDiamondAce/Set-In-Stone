@@ -50,7 +50,6 @@ enum State
 
 struct Inputs 
 {
-    //create more structs inside, such as a button struct, and joystick struct, and everythingelse
     bool buttonRed;
     bool buttonGreen;
     bool buttonBlue;
@@ -60,13 +59,14 @@ struct Inputs
     bool joystickButton;
     int potentiometerValue;
 };
+
 enum Difficulty
 {
-    //Assign values to the enum's
     EASY,
     MEDIUM,
     HARD
 };
+
 struct DifficultySettings
 {
     int timeout;
@@ -83,6 +83,7 @@ TFT_eSPI tft = TFT_eSPI();
 State state = START;
 State lastState = GAME_OVER;
 bool choseDifficulty = false;
+Difficulty chosenDifficulty;
 
 //Audio Variables
 BluetoothA2DPSource a2dp_source;
@@ -102,6 +103,9 @@ int currentInputIndex = 0;
 int amountOfInputs = 0; 
 bool lastPhysicalSwitchState;
 
+// Global live potentiometer value tracking for display updates
+int livePotValue = 0;
+
 //Function Prototypes
 void checkControls(Inputs inputs);
 void displayUpdate();
@@ -117,18 +121,14 @@ void buzz(int seconds) {
 }
 
 int32_t get_sd_audio_data(Frame *data, int32_t frameCount) {
-    // If no file is open, or we have hit the end of the sound effect, stop feeding data
     if (!audioFile || !audioFile.available()) {
         if (audioFile) {
-            audioFile.close(); // Close smoothly to free up SD card resources
+            audioFile.close(); 
         }
-        return 0; // Return 0 frames to keep the channel quiet
+        return 0; 
     }
     
-    // Read raw bytes directly into the Bluetooth buffer space
     size_t bytesRead = audioFile.read((uint8_t*)data, frameCount * FRAME_SIZE_BYTES);
-    
-    // Convert bytes read back into completed frame count
     return bytesRead / FRAME_SIZE_BYTES;
 }
 
@@ -138,29 +138,28 @@ DifficultySettings getDifficultySettings(Difficulty difficulty) {
         case EASY:
             settings.timeout = 4000;
             settings.inputVariety = 8; // Buttons + Joystick directions
-            settings.precisionOfAngleError = 30; // 30 degrees of error allowed
+            settings.precisionOfAngleError = 30; 
             break;
         case MEDIUM:
-            settings.timeout = 3000; // 3 seconds
+            settings.timeout = 3000; 
             settings.inputVariety = 10; // Buttons + Joystick directions + Potentiometer
-            settings.precisionOfAngleError = 20; // 20 degrees of error allowed
+            settings.precisionOfAngleError = 20; 
             break;
         case HARD:
-            settings.timeout = 2000; // 2 seconds
+            settings.timeout = 2000; 
             settings.inputVariety = 10; // Buttons + Joystick + Switch + Potentiometer
-            settings.precisionOfAngleError = 10; // 10 degrees of error allowed
+            settings.precisionOfAngleError = 10; 
             break;
     }
     return settings;
 }
 
-Difficulty chosenDifficulty;
-
 long getCurrentTimeout() {
     long baseTimeout = getDifficultySettings(chosenDifficulty).timeout;
     long adjustedTimeout = baseTimeout - (score * 200);
-    return max(adjustedTimeout, 600L); // Ensure a minimum timeout of 600ms
+    return max(adjustedTimeout, 600L); 
 }
+
 void setup() {
     Serial.begin(115200);
     pinMode(BUTTONRED, INPUT_PULLUP);
@@ -173,12 +172,11 @@ void setup() {
     pinMode(POT, INPUT);
     pinMode(BUZZER, OUTPUT);
     
-    // Turn on the display backlight
     pinMode(LED, OUTPUT);
     digitalWrite(LED, HIGH);
     
     tft.init();
-    tft.setRotation(1); // Landscape mode
+    tft.setRotation(1); 
     tft.fillScreen(TFT_BLACK);
 
     SPI.begin(18, 5, 23, CS_SD);
@@ -187,23 +185,15 @@ void setup() {
         Serial.println("SD Card initialization failed!");
         while (1); 
     }
-
-    // =========================================================================
-    // SIMULATION NOTICE: Comment out the line below to test your layout in Wokwi 
-    // without triggering a Watchdog Crash. Uncomment it when uploading to physical hardware!
-    // =========================================================================
-    //a2dp_source.start(bluetoothSpeakerName.c_str(), get_sd_audio_data);
     
     state = START;
     Serial.println("Setup Complete!"); 
 }
 
 void loop() {
-    // Step 1: Check for updates on controls
     Inputs inputs;
     checkControls(inputs);
 
-    // Step 2: Update game state/timers
     switch (state) {
         case START:
             break;
@@ -215,8 +205,9 @@ void loop() {
             if (millis() - actionTimer >= currentTimeout) {
                 hp--;
                 currentInputIndex = 0; 
+                
+                buzz(200); 
                 actionTimer = millis();
-                buzz(200); // Quick feedback buzz for timeout failure 
                 
                 if (hp <= 0) {
                     gameUpdate(0, true);
@@ -230,10 +221,7 @@ void loop() {
             break;
     }
 
-    // Step 3: Render everything to the display
     displayUpdate();
-
-    // EVERY LOOP PAUSE: Gives the Wokwi SPI simulator room to breathe!
     delay(20); 
 }
 
@@ -243,7 +231,7 @@ void gameUpdate(int scoreUpdate, bool gameOver)
 
     if (gameOver) {
         state = GAME_OVER;
-        tft.fillScreen(TFT_BLACK); // Clear layout for game over message
+        tft.fillScreen(TFT_BLACK); 
     } else {
         state = PLAYING;
     }
@@ -255,7 +243,7 @@ void displayUpdate()
     // 1. STATE TRANSITION RENDERING (Runs ONLY once right when the state changes)
     // =========================================================================
     if (state != lastState) {
-        tft.fillScreen(TFT_BLACK); // Fresh layout canvas brush clear
+        tft.fillScreen(TFT_BLACK); 
         tft.setTextSize(2);
 
         if (state == START) {
@@ -270,7 +258,6 @@ void displayUpdate()
             tft.setTextColor(TFT_WHITE, TFT_BLACK);
             tft.drawString("Press GREEN to Retry", 25, 120);
             
-            // Render fixed final snapshot scores
             tft.drawString("HP: 0 ", 10, 10);
             tft.drawString("Score: ", 110, 10);
             tft.drawNumber(score, 180, 10);
@@ -280,7 +267,6 @@ void displayUpdate()
             delay(500);
         }
         else if (state == PLAYING) {
-            // Draw static layout backgrounds once to eliminate performance drop
             tft.setTextColor(TFT_BLUE, TFT_BLACK);
             tft.drawString("HP:", 10, 10);
             tft.drawString("Score:", 100, 10);
@@ -289,32 +275,32 @@ void displayUpdate()
             tft.setTextColor(TFT_WHITE, TFT_BLACK);
             tft.drawString("ACTION TO DO:", 20, 65);
             tft.drawString("STEPS LEFT:", 20, 122); 
-            tft.drawRect(58, 148, 204, 14, TFT_WHITE); // Outer visual border line
+            tft.drawRect(58, 148, 204, 14, TFT_WHITE); 
         }
         
-        lastState = state; // Synchronization match check updated
+        lastState = state; 
         return; 
     }
 
-    // ====================================================================================================================
-    // 2. ACTIVE GAMEPLAY RENDERING (Runs sequentially ONLY when state == PLAYING) or choosing difficulty in the start menu
-    // ====================================================================================================================
+    // ==========================================================================
+    // 2. ACTIVE GAMEPLAY AND MENU RENDERING ENGINE
+    // ==========================================================================
     if (state == START && !choseDifficulty) {
         tft.setTextSize(2);
         tft.setTextColor(TFT_YELLOW, TFT_BLACK);
         tft.drawString("Choose Difficulty:", 40, 150);
 
-        tft.setTextColor(TFT_GREEN, TFT_BLACK);
         string difficultyOptions[3] = {"EASY", "MEDIUM", "HARD"};
         for (int i = 0; i < 3; i++) {
             if (i == chosenDifficulty) {
-                tft.setTextColor(TFT_YELLOW, TFT_BLACK); // Highlight selected difficulty
+                tft.setTextColor(TFT_YELLOW, TFT_BLACK); 
             } else {
                 tft.setTextColor(TFT_GREEN, TFT_BLACK);
             }
             tft.drawString(difficultyOptions[i].c_str(), 30 + i*80, 180);
         } 
     }
+    
     if (state == PLAYING) {
         static unsigned long lastRenderTime = 0;
         if (millis() - lastRenderTime < 30) return;
@@ -332,8 +318,15 @@ void displayUpdate()
 
         tft.setTextColor(TFT_YELLOW, TFT_BLACK);
         string targetAction = inputList[currentInputIndex];
+        
+        // Clean display text interceptor for encoded potentiometer targets
+        string cleanDisplayAction = targetAction;
+        if (targetAction.rfind("potentiometer:", 0) == 0) {
+            cleanDisplayAction = "TURN DIAL!";
+        }
+        
         char actionBuf[25];
-        sprintf(actionBuf, "%-16s", targetAction.c_str()); 
+        sprintf(actionBuf, "%-16s", cleanDisplayAction.c_str()); 
         tft.drawString(actionBuf, 40, 95);
 
         tft.setTextColor(TFT_GREEN, TFT_BLACK);
@@ -341,9 +334,49 @@ void displayUpdate()
         if (stepsRemaining < 0) stepsRemaining = 0;
         tft.drawNumber(stepsRemaining, 160, 122);
 
-        long currentTimeout = getCurrentTimeout();
-        if (currentTimeout < 600) currentTimeout = 600;
+        // --- POTENTIOMETER TARGET BRACKET VISUALIZER GRAPHICS ---
+        if (targetAction.rfind("potentiometer:", 0) == 0) {
+            int firstColon = targetAction.find(':');
+            int secondColon = targetAction.find(':', firstColon + 1);
+            int targetMin = stoi(targetAction.substr(firstColon + 1, secondColon - firstColon - 1));
+            int targetMax = stoi(targetAction.substr(secondColon + 1));
 
+            tft.setTextSize(1);
+            tft.setTextColor(TFT_BLUE, TFT_BLACK);
+            tft.drawString("0deg", 55, 185);
+            tft.drawString("270deg", 235, 185);
+            tft.drawRect(58, 170, 204, 12, TFT_BLUE); 
+
+            // Clear display track box interior channel
+            tft.fillRect(59, 171, 202, 10, TFT_BLACK);
+
+            // Translate angle parameters cleanly to visual monitor space
+            int bracketMinX = 60 + (targetMin * 200) / 270;
+            int bracketMaxX = 60 + (targetMax * 200) / 270;
+            int bracketWidth = bracketMaxX - bracketMinX;
+            if (bracketWidth < 6) bracketWidth = 6;
+
+            // Paint target window bracket strip bounds
+            tft.fillRect(bracketMinX, 171, bracketWidth, 10, TFT_YELLOW);
+
+            // Compute and position current dial knob tick indicator
+            float currentAngle = (livePotValue * 270.0) / 4095.0;
+            int cursorX = 60 + (currentAngle * 200) / 270;
+            if (cursorX > 260) cursorX = 260;
+            if (cursorX < 60) cursorX = 60;
+
+            // Highlight bar tracker node depending on alignment evaluation status
+            if (cursorX >= bracketMinX && cursorX <= bracketMaxX) {
+                tft.fillRect(cursorX - 2, 171, 5, 10, TFT_GREEN);
+            } else {
+                tft.fillRect(cursorX - 2, 171, 5, 10, TFT_CYAN);
+            }
+            tft.setTextSize(2); 
+        } else {
+            tft.fillRect(55, 170, 215, 25, TFT_BLACK); 
+        }
+
+        long currentTimeout = getCurrentTimeout();
         long elapsed = millis() - actionTimer;
         long remaining = currentTimeout - elapsed;
         if (remaining < 0) remaining = 0;
@@ -371,7 +404,9 @@ void checkControls(Inputs inputs)
     inputs.joystickY = analogRead(VRY)/2048.0 - 1;
     inputs.joystickButton = !digitalRead(SW);
     inputs.potentiometerValue = analogRead(POT);
-    float currentAngle = (inputs.potentiometerValue * 270.0) / 4095.0; // Convert potentiometer value to angle between 0 and 270 degrees
+    
+    // Sync live data out globally for display update sweeps
+    livePotValue = inputs.potentiometerValue;
 
     string currentInput = "";
     if (inputs.buttonRed) currentInput = "buttonRed";
@@ -383,8 +418,6 @@ void checkControls(Inputs inputs)
     else if (inputs.joystickX < -0.5) currentInput = "joystickLeft";
     else if (inputs.joystickY > 0.5) currentInput = "joystickUp";
     else if (inputs.joystickY < -0.5) currentInput = "joystickDown";
-
-
 
     static bool readyForInput = true;
 
@@ -399,9 +432,6 @@ void checkControls(Inputs inputs)
     if (state == START) {
         if (currentInput == "joystickRight" && readyForInput && !choseDifficulty) {
             chosenDifficulty = (Difficulty)(((int)chosenDifficulty + 1) % 3);
-            if (chosenDifficulty > HARD) {
-                chosenDifficulty = EASY;
-            }
             readyForInput = false;
             Serial.print("Difficulty Chosen: ");
             switch (chosenDifficulty) {
@@ -412,9 +442,6 @@ void checkControls(Inputs inputs)
         }
         if (currentInput == "joystickLeft" && readyForInput && !choseDifficulty) {
             chosenDifficulty = (Difficulty)(((int)chosenDifficulty - 1 + 3) % 3);
-            if (chosenDifficulty < EASY) {
-                chosenDifficulty = HARD;
-            }
             readyForInput = false;
             Serial.print("Difficulty Chosen: ");
             switch (chosenDifficulty) {
@@ -425,10 +452,9 @@ void checkControls(Inputs inputs)
         }
 
         if (currentInput == "buttonGreen" && readyForInput && choseDifficulty == false) {
-             Serial.println("Difficulty Confirmed! Starting Game...");
-            //Make a difficulty screen where you can use joystick to go left or right choosing the difficulty and then press green to confirm the difficulty choice. 
+            Serial.println("Difficulty Confirmed! Starting Game...");
             readyForInput = false; 
-            choseDifficulty = true; // Apply settings based on chosen difficulty
+            choseDifficulty = true; 
             hp = 3;
             score = 0;
             amountOfInputs = 0;
@@ -450,8 +476,10 @@ void checkControls(Inputs inputs)
     }
     if (state == GAME_OVER) {
         if (currentInput == "buttonGreen" && readyForInput) {
-             Serial.println("Starting Over! Returning to Difficulty Selection...");
-            choseDifficulty = false; // Reset difficulty choice to allow re-selection    
+            Serial.println("Starting Over! Returning to Difficulty Selection...");
+            choseDifficulty = false;   
+            
+            readyForInput = false;
             state = START;           
         }
         if (currentInput == "") {
@@ -473,18 +501,31 @@ void checkControls(Inputs inputs)
 
         string expectedInput = inputList[currentInputIndex];
 
-        if (currentInput == expectedInput) {
-            // --- MATCH SUCCESS ---
-            currentInputIndex++;
-            actionTimer = millis(); 
+        // Parse and check real-time target window alignment parameters
+        if (expectedInput.rfind("potentiometer:", 0) == 0) { 
+            int firstColon = expectedInput.find(':');
+            int secondColon = expectedInput.find(':', firstColon + 1);
+        
+            int targetMin = stoi(expectedInput.substr(firstColon + 1, secondColon - firstColon - 1));
+            int targetMax = stoi(expectedInput.substr(secondColon + 1));
+        
+            float currentAngle = (inputs.potentiometerValue * 270.0) / 4095.0;
+        
+            if (currentAngle >= targetMin && currentAngle <= targetMax) {
+                currentInput = expectedInput; 
+            }
+        }
 
-            // Trigger rightanswer.mp3 playback sequence from the SD card reader layout
+        if (currentInput == expectedInput) {
+            currentInputIndex++;
+            
             if (audioFile) {
-                audioFile.close(); // Safety drop any ongoing tracks 
+                audioFile.close(); 
             }
             audioFile = SD.open("/rightanswer.mp3", FILE_READ);
 
             Serial.println("Correct Input! Playing Audio!");
+            actionTimer = millis(); 
 
             if (currentInputIndex >= amountOfInputs) {
                 currentInputIndex = 0;
@@ -494,15 +535,15 @@ void checkControls(Inputs inputs)
         }
         else 
         {
-            // --- MISMATCH FAIL ---
             hp--;
             currentInputIndex = 0; 
-            actionTimer -= 1000; 
+            
+            buzz(1000); 
+            actionTimer = millis(); 
             
             if (hp <= 0) {
                 gameUpdate(0, true);
             }
-            buzz(1000); // Quick feedback buzz for wrong input
         }
     }
 }
@@ -521,19 +562,14 @@ void generateNewInputs()
         case 6: inputList[amountOfInputs] = "joystickLeft"; break;
         case 7: inputList[amountOfInputs] = "joystickRight"; break;
         case 8: inputList[amountOfInputs] = "joystickButton"; break;
-        break;
         case 9: {
-            //Easy is 30deg medium is 20degrees and hard is 10 degrees of precision allowed. The random angle generated is between 0 and 250 to allow for some variability in the potentiometer input.
-            int randomAngleMin = random(0,270-getDifficultySettings(chosenDifficulty).precisionOfAngleError);
-            int randomAngleMax = randomAngleMin + getDifficultySettings(chosenDifficulty).precisionOfAngleError;
-            //figure out how to give this info the display and also how to record this on the potetiometer input side.   
+            int errorWindow = getDifficultySettings(chosenDifficulty).precisionOfAngleError;
+            int randomAngleMin = random(0, 270 - errorWindow);
+            int randomAngleMax = randomAngleMin + errorWindow;
+            
             inputList[amountOfInputs] = "potentiometer:" + to_string(randomAngleMin) + ":" + to_string(randomAngleMax);
-
-            inputList[amountOfInputs] = "potentiometer"; 
-
         }
         break;
-
     }
     amountOfInputs++;
 }
