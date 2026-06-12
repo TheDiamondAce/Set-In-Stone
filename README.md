@@ -8,6 +8,9 @@ I wanted to do a minigame of sorts, learning how modules work and interact with 
 
 # What is this?
 This project is a minigame similar to Simon Says and Bop it combined, you have to do multiple inputs to get a point, making it harder and harder as you progress. It is a reaction game of sorts, benefiting the people with great hand to eye coordination
+
+# How to Build?
+To build this, you first need to get the pieces as listed in the BOM, you will have to download the code from the Code folder and need to 3D print the enclosure/chassis as well as the button caps. Then, you will need to get the required modules and follow the wiring diagram as shown below here. After, its just a matter of plugging into a power source through the cable, then plug and play!
 # What am I proud of?
 Most definitely the code first, then the CAD, but not far behind. The reason for this is because I think for the first time, I actually understood the code sorta, and figured out what each thing does, actually using struct functions and enum functions, in an actual way.
 Usually, when I coded, I never really bothered to use such types of functions, but with this project, I realized that, im getting better at coding. For CAD, I really am happy that I managed to get all of the constraints to a precises level to my standards. Also the way I designed it was 
