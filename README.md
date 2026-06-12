@@ -1,7 +1,6 @@
 # Set In Stone
 
-![Uploading Set In Stone Zine.png…]()
-
+<img width="1410" height="2000" alt="Set In Stone Zine" src="https://github.com/user-attachments/assets/7ec48585-5b24-425f-989c-2c6162edf363" />
 
 # Motivation
 Starting off with the motivation, I wanted to challenge myself, making something big for my second project, upon which I decided to ultilize my skills of CAD over 2 years on onshape and also my newfound knowledge of C++ hardware coding
@@ -40,6 +39,4 @@ Oh shoot yeah ur right
 
 # Wiring Diagram
 
-![Uploading Wiring Diagram.png…]()
-
-
+<img width="1480" height="950" alt="Wiring Diagram" src="https://github.com/user-attachments/assets/24865e81-b106-4792-8bcb-ab0a5528cc60" />
