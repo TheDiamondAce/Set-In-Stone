@@ -12,7 +12,7 @@ This project is a minigame similar to Simon Says and Bop it combined, you have t
 # How to Build?
 To build this, you first need to get the pieces as listed in the BOM, you will have to download the code from the Code folder and need to 3D print the enclosure/chassis as well as the button caps. Then, you will need to get the required modules and follow the wiring diagram as shown below here. After, its just a matter of plugging into a power source through the cable, then plug and play!
 # What am I proud of?
-Most definitely the code first, then the CAD, but not far behind. The reason for this is because I think for the first time, I actually understood the code sorta, and figured out what each thing does, actually using struct functions and enum functions, in an actual way.
+Most definitely the code first, then the CAD, but not far behind. The reason for this is because I think for the first time, I actually understood the code sorta, and figured out what each thing does, actually using struct functions and enum functions, in an actual way. (Update) Okay, so the first thing I'm proud of now is the PCB as this is the first time i've ever done PCB tinkering, and I'm glad to say, it was a success!
 Usually, when I coded, I never really bothered to use such types of functions, but with this project, I realized that, im getting better at coding. For CAD, I really am happy that I managed to get all of the constraints to a precises level to my standards. Also the way I designed it was 
 sorta challenging for me at my level.
 # What is the next steps?
@@ -42,4 +42,16 @@ Oh shoot yeah ur right
 
 # Wiring Diagram
 
+## Breadboard Prototype Wiring
+
 <img width="1480" height="950" alt="Wiring Diagram" src="https://github.com/user-attachments/assets/24865e81-b106-4792-8bcb-ab0a5528cc60" />
+
+## Schematics PCB Diagram
+
+<img width="1782" height="1386" alt="image" src="https://github.com/user-attachments/assets/1ea09986-ea63-4837-95e5-208438e8a7f9" />
+
+## PCB Footprint Diagaram
+
+<img width="1782" height="1386" alt="image" src="https://github.com/user-attachments/assets/65f54267-fcd5-499f-9a7d-fdcb657e2e47" />
+
+
