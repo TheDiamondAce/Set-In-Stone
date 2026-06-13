@@ -8,12 +8,12 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/include",
-                "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/src",
+                "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/Code/include",
+                "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/Code/src",
                 "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                 "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
-                "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/.pio/libdeps/esp32dev/ESP32-A2DP/src",
-                "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/.pio/libdeps/esp32dev/TFT_eSPI",
+                "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/Code/.pio/libdeps/esp32dev/ESP32-A2DP/src",
+                "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/Code/.pio/libdeps/esp32dev/TFT_eSPI",
                 "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/LittleFS/src",
                 "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                 "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
@@ -246,12 +246,12 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/include",
-                    "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/src",
+                    "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/Code/include",
+                    "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/Code/src",
                     "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/SD/src",
                     "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/BluetoothSerial/src",
-                    "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/.pio/libdeps/esp32dev/ESP32-A2DP/src",
-                    "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/.pio/libdeps/esp32dev/TFT_eSPI",
+                    "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/Code/.pio/libdeps/esp32dev/ESP32-A2DP/src",
+                    "/Users/hirashrestha/Documents/Coding Projects/Set-In-Stone/Code/.pio/libdeps/esp32dev/TFT_eSPI",
                     "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/LittleFS/src",
                     "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src",
                     "/Users/hirashrestha/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",

@@ -18,13 +18,13 @@
 #define BUZZER 15
 
 //Display Ports Defintion
-#define CS 27
-#define RST 19
-#define DC 2
+#define CS 5
+#define RST 27
+#define DC 15
 #define MOSI 23
 #define SCK 18
 #define LED 4
-#define MISO 5
+#define MISO 19
 #define SCL 22
 #define SDA 21
 
