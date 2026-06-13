@@ -11,3 +11,6 @@ Dupont Female-Male Wires,Used to connect modules to microcontroller and circuits
 M7 Jam Nut,7mm in diameter Jam nut. (Optional because potentiometer has this.),1,To Screw in the Potentiometer,not necessary
 M4 Screw,4mm in diameter Screw,4,To Screw in the Joystick Module and display.,already have this
 M4 Jam Nut,4mm in diameter Jam Nut,4,~. ~. ~. ~,already have this
+M3 Screw,3mm in diameter Screw for Electronics,4,For PCB,already have this
+M3 Jam Nut,To tighten the 3mm screw ,4,For PCB ,already have this
+PCB,A electrical component custom made for a specific task,1,So the whole thing can be connected seamlessly if not using a breadboard and jumper wires.,https://www.pcbway.com/
