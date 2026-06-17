@@ -1,0 +1,10 @@
+﻿Designator,Quantity,Value,Footprint,Package,MPN,DNP,Mount_Type,Description,KiLib_Generator,Sim.Device,Sim.Type,Sim.Pins,MF,MAXIMUM_PACKAGE_HEIGHT,Price,Check_prices,STANDARD,PARTREV,SnapEDA_Link,MP,MANUFACTURER,Availability,SNAPEDA_PN
+J1,1,TFT ILI9341 Cap Touch,PinSocket_1x09_P2.54mm_Vertical,,,,tht,"Generic connector, single row, 01x09, script generated (kicad-library-utils/schlib/autogen/connector/)",connector/pin_header_socket,,,,,,,,,,,,,,
+J2,1,Joystick,PinSocket_1x05_P2.54mm_Vertical,,,,tht,"Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)",connector/pin_header_socket,,,,,,,,,,,,,,
+J3,1,Conn_01x06,PinSocket_1x06_P2.54mm_Vertical,,,,tht,"Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)",connector/pin_header_socket,,,,,,,,,,,,,,
+RV1,1,R_Potentiometer,PinSocket_1x03_P2.54mm_Vertical,,,,tht,Potentiometer,connector/pin_header_socket,R,POT,1=r0 2=wiper 3=r1,,,,,,,,,,,
+SW1,1,Blue Button,SW_PUSH-12mm,,,,tht,"Push button switch, generic, two pins",,,,,,,,,,,,,,,
+SW2,1,Green Button,SW_PUSH-12mm,,,,tht,"Push button switch, generic, two pins",,,,,,,,,,,,,,,
+SW3,1,Yellow Button,SW_PUSH-12mm,,,,tht,"Push button switch, generic, two pins",,,,,,,,,,,,,,,
+SW4,1,Red_Button,SW_PUSH-12mm,,,,tht,"Push button switch, generic, two pins",,,,,,,,,,,,,,,
+U1,1,ESP32-DEVKITC-32D,MODULE_ESP32-DEVKITC-32D,None,,,tht,"WiFi Development Tools (802.11) ESP32 General Development Kit, ESP32-WROOM-32D on the board",,,,,Espressif Systems,N/A,None,https://www.snapeda.com/parts/ESP32-DEVKITC-32D/Espressif+Systems/view-part/?ref=eda,Manufacturer Recommendations,V4,https://www.snapeda.com/parts/ESP32-DEVKITC-32D/Espressif+Systems/view-part/?ref=snap,ESP32-DEVKITC-32D,Espressif Systems,In Stock,ESP32-DEVKITC-32D
