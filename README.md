@@ -48,10 +48,11 @@ Oh shoot yeah ur right
 
 ## Schematics PCB Diagram
 
-<img width="1782" height="1386" alt="image" src="https://github.com/user-attachments/assets/1ea09986-ea63-4837-95e5-208438e8a7f9" />
+<img width="1506" height="1194" alt="image" src="https://github.com/user-attachments/assets/2dd18649-7be0-4fd1-8ebc-23a52ee19778" />
 
 ## PCB Footprint Diagaram
 
-<img width="1782" height="1386" alt="image" src="https://github.com/user-attachments/assets/65f54267-fcd5-499f-9a7d-fdcb657e2e47" />
+<img width="1506" height="1194" alt="image" src="https://github.com/user-attachments/assets/0bd1cf37-ae43-4c8e-b961-f048c2d1e988" />
+
 
 
