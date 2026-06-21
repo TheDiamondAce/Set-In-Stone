@@ -1,6 +1,6 @@
 # Set In Stone
 
-<img width="1410" height="2000" alt="Set In Stone Zine" src="https://github.com/user-attachments/assets/7ec48585-5b24-425f-989c-2c6162edf363" />
+<img width="1938" height="2750" alt="Set In Stone Zine" src="https://github.com/user-attachments/assets/c7e30457-62f6-4e11-a223-f7d3e8c8154e" />
 
 # Motivation
 Starting off with the motivation, I wanted to challenge myself, making something big for my second project, upon which I decided to ultilize my skills of CAD over 2 years on onshape and also my newfound knowledge of C++ hardware coding
