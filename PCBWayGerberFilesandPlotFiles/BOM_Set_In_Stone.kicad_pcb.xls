@@ -1,5 +1,6 @@
 ﻿Designator,Quantity,Value,Footprint,Package,MPN,DNP,Mount_Type,Description,KiLib_Generator,Sim.Device,Sim.Type,Sim.Pins,MF,MAXIMUM_PACKAGE_HEIGHT,Price,Check_prices,STANDARD,PARTREV,SnapEDA_Link,MP,MANUFACTURER,Availability,SNAPEDA_PN
-J1,1,TFT ILI9341 Cap Touch,PinSocket_1x09_P2.54mm_Vertical,,,,tht,"Generic connector, single row, 01x09, script generated (kicad-library-utils/schlib/autogen/connector/)",connector/pin_header_socket,,,,,,,,,,,,,,
+BZ1,1,Buzzer,Buzzer_12x9.5RM7.6,,,,tht,"Buzzer, polarized",,,,,,,,,,,,,,,
+J1,1,TFT ILI9341 Cap Touch,PinHeader_1x11_P2.54mm_Vertical,,,,tht,"Generic connector, single row, 01x11, script generated (kicad-library-utils/schlib/autogen/connector/)",connector/pin_header_socket,,,,,,,,,,,,,,
 J2,1,Joystick,PinSocket_1x05_P2.54mm_Vertical,,,,tht,"Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)",connector/pin_header_socket,,,,,,,,,,,,,,
 J3,1,Conn_01x06,PinSocket_1x06_P2.54mm_Vertical,,,,tht,"Generic connector, single row, 01x06, script generated (kicad-library-utils/schlib/autogen/connector/)",connector/pin_header_socket,,,,,,,,,,,,,,
 RV1,1,R_Potentiometer,PinSocket_1x03_P2.54mm_Vertical,,,,tht,Potentiometer,connector/pin_header_socket,R,POT,1=r0 2=wiper 3=r1,,,,,,,,,,,
